@@ -9,9 +9,18 @@
 <body>
     <div id="app">
         <h1>{{header}}</h1>
-        <h2>{{subheader}}</h2>
-        <p>{{ content }}</p>
+        <h2 v-once>{{subheader|capitalize}}</h2>
+        <h3>{{hello()}}</h3>
+
         <input v-model="content">
+        <button v-on:mouseenter="addTodo">추가</button>
+
+        <ul>
+            <li v-for="todo in todos">{{todo}}</li>
+        </ul>
+        
+        <!-- <img v-bind:src="imageSource" width=400> -->
+        <!-- <a v-bind:href="linkSource">드루와</a> -->
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
@@ -19,8 +28,36 @@
         el: "#app",
         data : {
             header: 'Todo App',
-            subheader: '이것은 Todo App 입니다',
-            content: ''
+            subheader: 'i am your father',
+            content: '',
+            imageSource:'http://post.phinf.naver.net/MjAxNjEyMjNfMTUy/MDAxNDgyNDU4NDA5MjQz.dKL-QghaTPHEbCgETYQU3fDvieIHDCuZCWMK9SlSoVQg.yN9ScTjKBzYTg5fvdMSrESOFNLcym1LmvvJExGYH6Mkg.JPEG/IgoaYNxxbUejozuUgkuWL4-xsJFo.jpg',
+            linkSource:'https://namu.wiki/w/%EB%82%A8%EC%A3%BC%ED%98%81',
+            todos:['남주혁 생각하기','남주혁 보러가기']
+        },
+        methods:{
+            hello: function(){
+                this.subheader = "그저 빛"
+                return this.subheader
+            },
+            addTodo: function(){
+                this.todos.push(this.content)
+            }
+        },
+        filters: {
+            capitalize :function(val){
+                if (!val){
+                    return ""
+                }
+                val = val.toString()
+                return val.charAt(0).toUpperCase()+val.slice(1)
+            }
+        },
+        watch: { // 데이터의 변화 상태를 지켜보는 친구. 데이터가 변화할 때, xxx를 하게 만들 수 있음
+             todos:{
+                handler: function(){ // todos에 뭔가가 일어나면 이 handler를 하게 된다.
+                    alert("Todo 새로 추가 됬음!")
+                }
+             }
         }
     })
     </script>
