@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <span v-html="msg"></span>
+        <p>{{age}}</p>
+        <ul>
+            <li v-for="todo in todos">{{todo}}</li>
+        </ul>
+        <p v-if="isMarried">결혼했음</p>
+        <h2>게시판</h2>
+        <ol>
+            <li v-for="post in posts" v-if="post.checked">
+                <ul>
+                    <li v-for="element in post">{{element}}</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+    let app=new Vue({
+        el: '#app', //주어
+        data: {
+            msg: '<h1>Happy Hacking</h1>',
+            age: 25,
+            todos: ['Vue.js 배우기','javascript 복습하기'],
+            isMarried: true,
+            posts: [{
+                id:1,
+                content:'1번글',
+                checked:false
+            },{
+                id:2,
+                content:'2번글',
+                checked:false
+            },{
+                id:3,
+                content:'3번글',
+                checked:true
+            }]
+        },//목적어
+        methods: {
+            plus: function() {
+                this.age+=1
+            }
+        },//동사
+        /*
+        filters:,
+        computed:,
+        watch:,
+        directives:,
+        */
+    })
+
+    </script>   
+</body>
+</html>
