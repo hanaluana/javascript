@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="number++">1씩 증가</button>
+        <button @click="number--">1씩 감소</button>
+        <button @click="number+=2">2씩 증가</button>
+        <button @click="number-=2">2씩 감소</button>
+        <button @click="addThree(3)">3씩 증가</button>
+        <button @click="secondNumber++">second number++</button>
+
+        <p>{{number}}</p>
+        <p>{{ computedNumber }} && {{ TenUpper() }}</p>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+    new Vue({
+        el: '#app',
+        data:{
+            number:0,
+            secondNumber: 0,
+        },
+        computed: { //computed는 data처럼 활용되기 때문에 반드시 return값이 있어야 함, 비동기적 처리 사용에는 X
+            computedNumber: function(){
+                console.log('나는 computed')
+                return this.secondNumber > 10 ? '10보다 큽니다' : '10보다 작습니다'
+            }
+        },
+        methods:{ // 비동기적 처리는 method 사용!
+            addThree:function(num){
+                return this.number+=num
+            },
+            TenUpper: function(){
+                console.log('나는 method')
+                return this.secondNumber > 10 ? '10보다 큽니다' : '10보다 작습니다'
+            }
+        }
+    })
+    </script>
+</body>
+</html>
